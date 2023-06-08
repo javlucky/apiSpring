@@ -25,7 +25,7 @@ public class PersonService {
 
     public Person createPerson(PersonInput personInput) {
         Book book = createBook(personInput.getIsbn());
-        return new Person(personInput.getName(), personInput.getDni(), personInput.getAge(), book);
+        return personRepository.save(new Person(personInput.getName(), personInput.getDni(), personInput.getAge(), book));
     }
 
     private Book createBook(String isbn) {
@@ -37,8 +37,8 @@ public class PersonService {
                  volumeInfo.getTitle(), 
                  volumeInfo.getAuthors().get(0), 
                  volumeInfo.getPublisher(), 
-                 volumeInfo.getPublisheDate(), 
-                 volumeInfo.getDescription()
+                 volumeInfo.getPublishedDate(),
+                String.valueOf(volumeInfo.getDescription().length())
                  );
     }
 }
